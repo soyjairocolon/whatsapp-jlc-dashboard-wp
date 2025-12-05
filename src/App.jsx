@@ -1,38 +1,61 @@
+import { useState } from 'react';
+import GeneralTab from "./components/tabs/general_tab";
+import EstilosTab from "./components/tabs/estilos_tab";
+import AvanzadoTab from "./components/tabs/avanzado_tab";
 import './index.css';
 
 export default function App() {
+	const [activeTab, setActiveTab] = useState('general');
+
+	const renderContent = () => {
+		switch (activeTab) {
+			case 'general':
+				return <GeneralTab />;
+			case 'estilos':
+				return <EstilosTab />;
+			case 'avanzado':
+				return <AvanzadoTab />;
+			default:
+				return <GeneralTab />;
+		}
+	};
+
 	return (
 		<div className="jlc-dashboard">
 			<aside className="jlc-sidebar">
 				<h2 className="jlc-sidebar-title">WhatsApp JLC</h2>
 
 				<nav className="jlc-nav">
-					<button className="jlc-nav-item jlc-active">General</button>
-					<button className="jlc-nav-item">Estilos</button>
-					<button className="jlc-nav-item">Avanzado</button>
+					<button
+						className={`jlc-nav-item ${
+							activeTab === 'general' ? 'jlc-active' : ''
+						}`}
+						onClick={() => setActiveTab('general')}
+					>
+						General
+					</button>
+
+					<button
+						className={`jlc-nav-item ${
+							activeTab === 'estilos' ? 'jlc-active' : ''
+						}`}
+						onClick={() => setActiveTab('estilos')}
+					>
+						Estilos
+					</button>
+
+					<button
+						className={`jlc-nav-item ${
+							activeTab === 'avanzado' ? 'jlc-active' : ''
+						}`}
+						onClick={() => setActiveTab('avanzado')}
+					>
+						Avanzado
+					</button>
 				</nav>
 			</aside>
 
-			<main className="jlc-content">
-				<h1 className="jlc-page-title">Configuración General</h1>
-
-				<div className="jlc-card">
-					<label className="jlc-label">Número de WhatsApp</label>
-					<input
-						className="jlc-input"
-						type="text"
-						placeholder="+57 300 000 0000"
-					/>
-
-					<label className="jlc-label">Mensaje inicial</label>
-					<textarea
-						className="jlc-textarea"
-						placeholder="Hola, quisiera más información..."
-					></textarea>
-
-					<button className="jlc-btn-primary">Guardar cambios</button>
-				</div>
-			</main>
+			<main className="jlc-content">{renderContent()}</main>
 		</div>
 	);
 }
