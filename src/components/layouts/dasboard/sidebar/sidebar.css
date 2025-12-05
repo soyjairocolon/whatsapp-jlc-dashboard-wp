@@ -1,0 +1,51 @@
+.jlc-sidebar {
+	width: 250px;
+	background: var(--jlc-premium-dark);
+	padding: 26px;
+	color: #fff;
+	box-shadow: var(--jlc-shadow);
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.jlc-sidebar-title {
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 8px;
+	color: #fff;
+}
+
+.jlc-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+/* Botones premium */
+.jlc-nav-item {
+	display: block;
+	padding: 12px 16px;
+	color: #bebebe;
+	background: transparent;
+	border-radius: 10px;
+	border: 1px solid transparent;
+	font-size: 15px;
+	cursor: pointer;
+	transition: all 0.22s ease;
+}
+
+/* Hover suave */
+.jlc-nav-item:hover {
+	background: var(--jlc-premium-gray);
+	color: #fff;
+}
+
+/* Estado activo premium */
+.jlc-active {
+	background: var(--jlc-premium-gray);
+	color: #fff;
+	border-color: rgba(255, 255, 255, 0.12);
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
+	font-weight: 600;
+}

@@ -1,0 +1,120 @@
+.jlc-section-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: #1b1d1f;
+	margin-bottom: 20px;
+	letter-spacing: -0.3px;
+}
+
+.jlc-section-description {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.55);
+	margin-bottom: 20px;
+	line-height: 1.4;
+}
+
+.jlc-phone-settings {
+	padding: 5px;
+}
+
+.jlc-phone-row {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 12px;
+}
+
+.jlc-phone-container {
+	width: 260px !important;
+}
+
+.jlc-phone-input {
+	width: 100% !important;
+	height: 48px !important;
+	border-radius: 12px !important;
+	border: 1px solid #d9dce1 !important;
+	background: #f9fafb !important;
+	padding-left: 54px !important;
+	font-size: 15px !important;
+	color: #2b2f33 !important;
+	transition: all 0.25s ease;
+}
+
+.jlc-phone-input:focus {
+	background: #ffffff !important;
+	border-color: #0ba360 !important;
+	box-shadow: 0 0 0 3px rgba(11, 163, 96, 0.18) !important;
+}
+
+.jlc-phone-flag {
+	border-radius: 10px 0 0 10px !important;
+}
+
+.jlc-btn-secondary {
+	background: #ffffff;
+	border: 1px solid #d9dce1;
+	padding: 11px 16px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	color: #1b1d1f;
+	transition: all 0.25s ease;
+}
+
+.jlc-btn-secondary:hover {
+	background: #f3f4f6;
+	border-color: #c9ccd2;
+}
+
+.jlc-helper {
+	font-size: 13px;
+	color: #6b7076;
+	margin: 4px 0 18px;
+}
+
+.jlc-textarea {
+	width: 100%;
+	padding: 14px;
+	border-radius: 12px;
+	border: 1px solid #d9dce1;
+	background: #f9fafb;
+	transition: all 0.25s ease;
+	font-size: 15px;
+	min-height: 110px;
+	color: #2b2f33;
+}
+
+.jlc-input,
+.jlc-textarea,
+.jlc-select {
+	width: 100%;
+	padding: 12px;
+	border-radius: 10px;
+	border: 1px solid #dcdcdc;
+	background: #fff;
+	font-size: 14px;
+	transition: 0.2s;
+}
+
+.jlc-input:focus,
+.jlc-textarea:focus,
+.jlc-select:focus {
+	border-color: var(--jlc-primary);
+	box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+	outline: none;
+}
+
+.jlc-textarea {
+	min-height: 90px;
+	resize: vertical;
+}
+
+.jlc-label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #2b2f33;
+	margin-bottom: 6px;
+	display: block;
+	letter-spacing: -0.2px;
+}

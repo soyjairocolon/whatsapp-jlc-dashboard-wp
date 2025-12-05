@@ -1,3 +1,5 @@
+import './dashboard_layout.css'
+
 export default function DashboardLayout({ sidebar, children }) {
 	return (
 		<div className="jlc-dashboard">

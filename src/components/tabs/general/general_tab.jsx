@@ -1,26 +1,33 @@
-// import '../../components/Card.css';
+import PhoneSettings from './sections/phone-settings/phone_settings';
+import IconSelector from './sections/icon-selector/icon_selector';
+import FloatingButtonOptions from './sections/floating-button-options/floating_button_options';
+import PreviewBox from './sections/preview-box/preview_box';
 import './general_tab.css';
 
 export default function GeneralTab() {
 	return (
-		<div>
+		<div className="jlc-general-page">
 			<h1 className="jlc-page-title">Configuración General</h1>
 
-			<div className="jlc-card">
-				<label className="jlc-label">Número de WhatsApp</label>
-				<input
-					type="text"
-					className="jlc-input"
-					placeholder="+57 300 000 0000"
-				/>
+			<div className="jlc-sections-wrapper">
+				<div className="jlc-section-card">
+					<PhoneSettings />
+				</div>
 
-				<label className="jlc-label">Mensaje inicial</label>
-				<textarea
-					className="jlc-textarea"
-					placeholder="Hola, quisiera más información..."
-				></textarea>
+				<div className="jlc-section-card">
+					<IconSelector />
+				</div>
 
-				<button className="jlc-btn-primary">Guardar cambios</button>
+				<div className="jlc-section-card">
+					<FloatingButtonOptions />
+				</div>
+
+				<div className="jlc-section-card">
+					<PreviewBox />
+				</div>
+				<button className="jlc-btn-primary jlc-save-btn">
+					Guardar cambios
+				</button>
 			</div>
 		</div>
 	);
