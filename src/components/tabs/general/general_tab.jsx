@@ -1,13 +1,16 @@
+// import '../../components/Card.css';
+import './general_tab.css';
+
 export default function GeneralTab() {
 	return (
-		<>
+		<div>
 			<h1 className="jlc-page-title">Configuración General</h1>
 
 			<div className="jlc-card">
 				<label className="jlc-label">Número de WhatsApp</label>
 				<input
-					className="jlc-input"
 					type="text"
+					className="jlc-input"
 					placeholder="+57 300 000 0000"
 				/>
 
@@ -19,6 +22,6 @@ export default function GeneralTab() {
 
 				<button className="jlc-btn-primary">Guardar cambios</button>
 			</div>
-		</>
+		</div>
 	);
 }
