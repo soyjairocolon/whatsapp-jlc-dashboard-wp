@@ -1,0 +1,52 @@
+.jlc-image-picker {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.jlc-image-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.jlc-custom-image-preview {
+	width: 55px;
+	height: 55px;
+	border-radius: 12px;
+	object-fit: cover;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+	border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Botón premium linear */
+.jlc-btn-linear {
+	background: linear-gradient(135deg, #4a6cf7, #6a89ff);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	transition: all 0.25s ease;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.jlc-btn-linear:hover {
+	filter: brightness(1.07);
+	transform: translateY(-1px);
+}
+
+/* Botón eliminar */
+.jlc-btn-delete {
+	background: #fff;
+	border: 1px solid #cfcfcf;
+	padding: 10px 16px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-weight: 600;
+	color: #1b1d1f;
+}
+
+.jlc-btn-delete:hover {
+	background: #f2f2f2;
+}

@@ -6,6 +6,8 @@ import EstilosTab from '../../components/tabs/estilos/estilos_tab';
 import VisibilidadTab from '../../components/tabs/visibilidad/visibilidad_tab';
 import AvanzadoTab from '../../components/tabs/avanzado/avanzado_tab';
 import PremiumTab from '../../components/tabs/premium/premium_tab';
+import { AnimatePresence, motion } from 'framer-motion';
+import { fadeInUp } from '../../motion/variants';
 import './dashboard.css';
 
 export default function Dashboard() {
@@ -31,7 +33,20 @@ export default function Dashboard() {
 	return (
 		<div className="jlc-dashboard">
 			<Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-			<Content>{renderTab()}</Content>
+			<main className="jlc-content">
+				<AnimatePresence mode="wait">
+					<motion.div
+						key={activeTab}
+						initial="hidden"
+						animate="show"
+						exit={{ opacity: 0, y: -10 }}
+						variants={fadeInUp}
+						style={{ width: '100%' }}
+					>
+						{renderTab()}
+					</motion.div>
+				</AnimatePresence>
+			</main>
 		</div>
 	);
 }

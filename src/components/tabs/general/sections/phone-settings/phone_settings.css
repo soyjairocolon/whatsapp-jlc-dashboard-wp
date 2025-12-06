@@ -75,6 +75,7 @@
 
 .jlc-textarea {
 	width: 100%;
+	max-width: 600px;
 	padding: 14px;
 	border-radius: 12px;
 	border: 1px solid #d9dce1;
@@ -86,7 +87,6 @@
 }
 
 .jlc-input,
-.jlc-textarea,
 .jlc-select {
 	width: 100%;
 	padding: 12px;
@@ -117,4 +117,78 @@
 	margin-bottom: 6px;
 	display: block;
 	letter-spacing: -0.2px;
+}
+
+/* ===========================================================
+   📱 MOBILE VERSION — Phone Settings
+   =========================================================== */
+@media (max-width: 768px) {
+	.jlc-phone-settings {
+		padding: 12px 4px;
+	}
+
+	.jlc-section-title {
+		font-size: 20px;
+		margin-bottom: 16px;
+	}
+
+	.jlc-section-description {
+		font-size: 13px;
+		margin-bottom: 16px;
+	}
+
+	/* Input + botón stacked en mobile */
+	.jlc-phone-row {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 10px;
+	}
+
+	.jlc-phone-container {
+		width: 100% !important;
+	}
+
+	.jlc-phone-input {
+		height: 52px !important;
+		font-size: 16px !important;
+		padding-left: 54px !important;
+		border-radius: 12px !important;
+	}
+
+	.jlc-phone-flag {
+		border-radius: 12px 0 0 12px !important;
+	}
+
+	.jlc-btn-secondary {
+		width: 100%;
+		text-align: center;
+		padding: 13px 18px;
+		font-size: 15px;
+		border-radius: 12px;
+	}
+
+	.jlc-helper {
+		font-size: 12.5px;
+		line-height: 1.35;
+		margin-bottom: 14px;
+	}
+
+	.jlc-textarea {
+		max-width: 92%;
+		min-height: 120px;
+		font-size: 15px;
+		padding: 14px;
+		border-radius: 12px;
+	}
+
+	.jlc-label {
+		font-size: 14px;
+		margin-top: 10px;
+	}
+
+	/* mejora visual general en mobile */
+	.jlc-phone-settings p,
+	.jlc-phone-settings label {
+		padding-left: 2px;
+	}
 }

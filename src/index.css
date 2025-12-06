@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+body {
+	font-family: 'Inter', sans-serif;
+}
+
+.jlc-section-title {
+	font-weight: 700;
+}
+
+.jlc-label {
+	font-weight: 600;
+}
+
+.jlc-helper {
+	font-weight: 400;
+	opacity: 0.75;
+}
+
+.jlc-btn-primary {
+	font-weight: 600;
+}
+
 :root {
 	--jlc-primary: #25d366;
 	--jlc-primary-dark: #1ebe57;
@@ -15,10 +38,23 @@
 	--jlc-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Layout global */
-.jlc-dashboard {
-	display: flex;
-	min-height: 100vh;
-	background: var(--jlc-premium-bg);
-	font-family: 'Inter', sans-serif;
+html,
+body {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+#wpbody-content {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+#wpcontent {
+	width: 100% !important;
+	padding-left: 0 !important;
 }

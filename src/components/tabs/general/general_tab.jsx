@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PhoneSettings from './sections/phone-settings/phone_settings';
 import IconSelector from './sections/icon-selector/icon_selector';
 import FloatingButtonOptions from './sections/floating-button-options/floating_button_options';
@@ -5,27 +6,76 @@ import PreviewBox from './sections/preview-box/preview_box';
 import './general_tab.css';
 
 export default function GeneralTab() {
+	const [globalData, setGlobalData] = useState({
+		phone: {},
+		icon: {},
+		floating: {},
+	});
+
+	const updateSectionData = (section, values) => {
+		setGlobalData((prev) => ({
+			...prev,
+			[section]: { ...prev[section], ...values },
+		}));
+	};
+
+	const saveAllChanges = async () => {
+		const payload = {
+			phone: globalData.phone,
+			icon: globalData.icon,
+			floating: globalData.floating,
+		};
+
+		console.log('Datos enviados al servidor:', payload);
+
+		try {
+			const res = await fetch('/wp-json/wjlc/v1/save-general-settings', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload),
+			});
+
+			if (!res.ok) throw new Error('Error en la petición');
+
+			alert('Cambios guardados correctamente');
+		} catch (error) {
+			console.error(error);
+			alert('Error al guardar los cambios');
+		}
+	};
+
 	return (
 		<div className="jlc-general-page">
 			<h1 className="jlc-page-title">Configuración General</h1>
 
 			<div className="jlc-sections-wrapper">
 				<div className="jlc-section-card">
-					<PhoneSettings />
+					<PhoneSettings
+						onChange={(data) => updateSectionData('phone', data)}
+					/>
 				</div>
 
 				<div className="jlc-section-card">
-					<IconSelector />
+					<IconSelector
+						settings={globalData.icon}
+						onChange={(updated) => updateSectionData('icon', updated)}
+					/>
 				</div>
 
 				<div className="jlc-section-card">
-					<FloatingButtonOptions />
+					<FloatingButtonOptions
+						onChange={(data) => updateSectionData('floating', data)}
+					/>
 				</div>
 
 				<div className="jlc-section-card">
 					<PreviewBox />
 				</div>
-				<button className="jlc-btn-primary jlc-save-btn">
+
+				<button
+					className="jlc-save-btn jlc-btn-primary"
+					onClick={saveAllChanges}
+				>
 					Guardar cambios
 				</button>
 			</div>

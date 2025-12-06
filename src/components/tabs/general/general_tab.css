@@ -1,4 +1,8 @@
 .jlc-general-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
 	padding: 10px 0;
 }
 
@@ -12,21 +16,25 @@
 .jlc-sections-wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: 25px;
-	/* max-width: 850px; */
+	background: #fff;
+	border-radius: 18px;
+	padding: 0px 20px 30px;
+	border: 1px solid rgba(0, 0, 0, 0.04);
+	max-width: 100%;
+	width: 95%;
+	margin-bottom: 40px;
+	box-shadow: var(--jlc-shadow);
+}
+
+.jlc-section + .jlc-section {
+	border-top: 1px solid #f1f1f1;
+	padding-top: 28px;
+	margin-top: 28px;
 }
 
 .jlc-section-card {
 	background: #ffffff;
-	border-radius: 14px;
 	padding: 30px 28px;
-	box-shadow: 0 6px 28px rgba(0, 0, 0, 0.06);
-	border: 1px solid #e6e8ec;
-	transition: all 0.2s ease;
-}
-
-.jlc-section-card:hover {
-	box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
 }
 
 .jlc-save-btn {
@@ -57,4 +65,11 @@
 .jlc-save-btn:active {
 	transform: scale(0.98);
 	box-shadow: 0 3px 8px rgba(37, 211, 102, 0.25);
+}
+
+@media (max-width: 768px) {
+	.jlc-general-page {
+		justify-content: center;
+		align-items: center;
+	}
 }

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import './phone_settings.css';
 
-export default function PhoneSettings() {
-	const [phone, setPhone] = useState('');
+export default function PhoneSettings({ onChange, defaultValues = {} }) {
+	const [phone, setPhone] = useState(defaultValues.phone || '');
 	const [initialMessage, setInitialMessage] = useState('');
 
 	const SITE = window.wjlc_site_name || '{SITE}';
@@ -13,9 +13,14 @@ export default function PhoneSettings() {
 	const defaultMessage = `Hola *${SITE}*. Necesito más información sobre ${TITLE} ${URL}`;
 
 	useEffect(() => {
-		setInitialMessage(defaultMessage);
+		setInitialMessage(defaultValues.initialMessage || defaultMessage);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		onChange({ phone, initialMessage });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [phone, initialMessage]);
 
 	const testNumber = () => {
 		if (!phone) return alert('Por favor ingresa un número válido');
@@ -41,7 +46,7 @@ export default function PhoneSettings() {
 				<PhoneInput
 					country={'co'}
 					value={phone}
-					onChange={setPhone}
+					onChange={(value) => setPhone(value)}
 					enableSearch
 					placeholder="+57 300 000 0000"
 					inputClass="jlc-phone-input"
