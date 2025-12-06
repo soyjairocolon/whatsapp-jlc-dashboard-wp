@@ -126,7 +126,7 @@
 }
 
 /* Botón premium linear */
-.jlc-btn-linear {
+/* .jlc-btn-linear {
 	background: linear-gradient(135deg, #0ba360, #1ed760);
 	color: white;
 	padding: 10px 18px;
@@ -142,7 +142,7 @@
 .jlc-btn-linear:hover {
 	filter: brightness(1.08);
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-}
+} */
 
 /* Botón eliminar */
 .jlc-btn-delete {

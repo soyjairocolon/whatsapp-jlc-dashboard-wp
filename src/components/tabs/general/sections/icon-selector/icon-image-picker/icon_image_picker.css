@@ -1,21 +1,30 @@
 .jlc-image-picker {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: 14px;
+	margin: 10px 0 20px;
 }
 
 .jlc-image-actions {
 	display: flex;
+	align-items: center;
 	gap: 10px;
 }
 
 .jlc-custom-image-preview {
-	width: 55px;
-	height: 55px;
+	width: 52px;
+	height: 52px;
 	border-radius: 12px;
-	object-fit: cover;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+	overflow: hidden;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	border: 1px solid rgba(0, 0, 0, 0.08);
+	flex-shrink: 0;
+}
+
+.jlc-image-preview img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 /* Botón premium linear */
@@ -39,14 +48,17 @@
 /* Botón eliminar */
 .jlc-btn-delete {
 	background: #fff;
-	border: 1px solid #cfcfcf;
+	border: 1px solid #d9dce1;
 	padding: 10px 16px;
 	border-radius: 10px;
 	cursor: pointer;
+	font-size: 14px;
 	font-weight: 600;
 	color: #1b1d1f;
+	transition: all 0.25s ease;
 }
 
 .jlc-btn-delete:hover {
-	background: #f2f2f2;
+	background: #f3f4f6;
+	border-color: #babec3;
 }

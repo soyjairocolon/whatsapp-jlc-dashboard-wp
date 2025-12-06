@@ -1,9 +1,8 @@
 /* global wp */
-import { useState } from 'react';
-import './icon_image_picker.css';
+import './icon_image_picker.css'
 
 export default function IconImagePicker({ value, onChange, buttonClass = '' }) {
-	const [image, setImage] = useState(value || '');
+	const image = value || ''; 
 
 	const openMediaUploader = () => {
 		const frame = wp.media({
@@ -14,16 +13,14 @@ export default function IconImagePicker({ value, onChange, buttonClass = '' }) {
 
 		frame.on('select', () => {
 			const attachment = frame.state().get('selection').first().toJSON();
-			setImage(attachment.url);
-			onChange?.(attachment.url);
+			onChange?.(attachment.url); 
 		});
 
 		frame.open();
 	};
 
 	const removeImage = () => {
-		setImage('');
-		onChange?.('');
+		onChange('');
 	};
 
 	return (

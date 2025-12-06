@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import IconImagePicker from './icon-image-picker/icon_image_picker';
 import iconFree1 from '../../../../../assets/icons/free/free-1-icon-ws.png';
 import iconFree2 from '../../../../../assets/icons/free/free-2-icon-ws.png';
+import iconFree3 from '../../../../../assets/icons/free/free-3-icon-ws.webp';
 import './icon_selector.css';
 
 export default function IconSelector({ onChange }) {
@@ -16,7 +17,7 @@ export default function IconSelector({ onChange }) {
 	const freeIcons = [
 		{ id: 'default_whatsapp', src: iconFree1 },
 		{ id: 'default_chat', src: iconFree2 },
-		{ id: 'default_support', src: '/icons/default_support.png' },
+		{ id: 'default_support', src: iconFree3 },
 	];
 
 	const premiumIcons = [
@@ -120,7 +121,6 @@ export default function IconSelector({ onChange }) {
 					<IconImagePicker
 						value={settings.custom_image}
 						onChange={(url) => updateSettings({ custom_image: url })}
-						buttonClass="jlc-btn-linear"
 					/>
 
 					{/* Botón eliminar */}
@@ -158,7 +158,7 @@ export default function IconSelector({ onChange }) {
 			</div>
 
 			<div className="jlc-color-box">
-				<label className="jlc-label">Color del botón</label>
+				<label className="jlc-label">Selecciona el color del botón</label>
 
 				<input
 					type="color"
