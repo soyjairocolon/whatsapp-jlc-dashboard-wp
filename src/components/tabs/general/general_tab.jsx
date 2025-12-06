@@ -1,3 +1,4 @@
+/* global wjlcData */
 import { useState } from 'react';
 import PhoneSettings from './sections/phone-settings/phone_settings';
 import IconSelector from './sections/icon-selector/icon_selector';
@@ -31,7 +32,10 @@ export default function GeneralTab() {
 		try {
 			const res = await fetch('/wp-json/wjlc/v1/save-general-settings', {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': wjlcData.nonce, 
+				},
 				body: JSON.stringify(payload),
 			});
 
