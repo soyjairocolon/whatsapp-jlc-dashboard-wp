@@ -19,9 +19,9 @@ export default function IconImagePicker({ value, onChange, buttonClass = '' }) {
 		frame.open();
 	};
 
-	const removeImage = () => {
-		onChange('');
-	};
+	// const removeImage = () => {
+	// 	onChange('');
+	// };
 
 	return (
 		<div className="jlc-image-picker">
@@ -39,11 +39,11 @@ export default function IconImagePicker({ value, onChange, buttonClass = '' }) {
 					Seleccionar imagen
 				</button>
 
-				{image && (
+				{/* {image && (
 					<button className="jlc-btn-delete" onClick={removeImage}>
 						Eliminar
 					</button>
-				)}
+				)} */}
 			</div>
 		</div>
 	);

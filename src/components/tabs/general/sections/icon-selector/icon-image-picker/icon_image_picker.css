@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	gap: 14px;
-	margin: 10px 0 20px;
+	/* margin: 10px 0 20px; */
 }
 
 .jlc-image-actions {
@@ -25,6 +25,7 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	display: none;
 }
 
 /* Botón premium linear */

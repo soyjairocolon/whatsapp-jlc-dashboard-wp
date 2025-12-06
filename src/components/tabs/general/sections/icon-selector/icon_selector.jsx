@@ -121,6 +121,7 @@ export default function IconSelector({ onChange }) {
 					<IconImagePicker
 						value={settings.custom_image}
 						onChange={(url) => updateSettings({ custom_image: url })}
+						buttonClass="jlc-btn-linear"
 					/>
 
 					{/* Botón eliminar */}

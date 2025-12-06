@@ -112,7 +112,7 @@
 	display: flex;
 	align-items: center;
 	gap: 14px;
-	margin-bottom: 12px;
+	margin: 12px 0;
 }
 
 /* Vista previa de imagen */
