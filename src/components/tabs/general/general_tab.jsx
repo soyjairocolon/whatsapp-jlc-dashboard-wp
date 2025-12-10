@@ -106,7 +106,7 @@ export default function GeneralTab() {
 					/>
 				</div>
 
-				<div className="jlc-section-card">
+				<div className="jlc-section-card jlc-section-card__previewbox">
 					<PreviewBox />
 				</div>
 

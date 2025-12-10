@@ -23,6 +23,7 @@
 	max-width: 100%;
 	width: 95%;
 	margin-bottom: 40px;
+	position: relative;
 	box-shadow: var(--jlc-shadow);
 }
 
@@ -35,6 +36,12 @@
 .jlc-section-card {
 	background: #ffffff;
 	padding: 0px;
+}
+
+.jlc-section-card__previewbox {
+	position: absolute;
+	top: 16px;
+	right: 16px;
 }
 
 .jlc-save-btn {
