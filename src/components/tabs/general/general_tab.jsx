@@ -101,6 +101,7 @@ export default function GeneralTab() {
 
 				<div className="jlc-section-card">
 					<FloatingButtonOptions
+						settings={globalData.floating}
 						onChange={(data) => updateSectionData('floating', data)}
 					/>
 				</div>
