@@ -14,12 +14,9 @@ export default function GeneralTab({ globalSettings, updateSettings }) {
 	};
 
 	const updateGeneral = (field, values) => {
-		updateSettings('general', {
-			...general,
-			[field]: {
-				...general[field],
-				...values,
-			},
+		updateSettings(field, {
+			...general[field],
+			...values,
 		});
 	};
 
@@ -78,7 +75,7 @@ export default function GeneralTab({ globalSettings, updateSettings }) {
 
 				<div className="jlc-section-card">
 					<FloatingButtonOptions
-						settings={general.floating}
+						settings={globalSettings.general.floating}
 						onChange={(data) => updateGeneral('floating', data)}
 					/>
 				</div>

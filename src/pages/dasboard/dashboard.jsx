@@ -47,12 +47,15 @@ export default function Dashboard() {
 				const json = await res.json();
 
 				if (json.success && json.settings) {
+					const incomingGeneral = json.settings.general || {};
+
 					setGlobalSettings((prev) => ({
 						...prev,
 						...json.settings,
 						general: {
-							...prev.general,
-							...(json.settings.general || {}),
+							phone: incomingGeneral.phone || {},
+							icon: incomingGeneral.icon || {},
+							floating: incomingGeneral.floating || {}, 
 						},
 					}));
 				}

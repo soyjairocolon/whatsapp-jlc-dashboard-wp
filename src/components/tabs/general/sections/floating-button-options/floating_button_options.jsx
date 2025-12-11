@@ -1,92 +1,38 @@
-/* global wjlcData */
-import { useState, useEffect, useRef } from 'react';
+// /* global wjlcData */
+import { useEffect } from 'react';
 import './floating_button_options.css';
 
-export default function FloatingButtonOptions({ onChange }) {
-	const [tooltipText, setTooltipText] = useState('');
-	const [position, setPosition] = useState('right');
-	const [delay, setDelay] = useState(1);
-	const [mobileOnly, setMobileOnly] = useState(false);
-	const [animationType, setAnimationType] = useState('none');
-	const [tooltipInterval, setTooltipInterval] = useState(8);
-	const [showQR, setShowQR] = useState(false);
-	const [openWeb, setOpenWeb] = useState(false);
+export default function FloatingButtonOptions({ settings = {}, onChange }) {
+	const defaultSettings = {
+		tooltipText: '¿Necesitas ayuda?',
+		tooltipInterval: 8,
+		position: 'right',
+		animationType: 'none',
+		delay: 1,
+		mobileOnly: false,
+		showQR: false,
+		openWeb: false,
+	};
 
-	const onChangeRef = useRef(onChange);
+	// Normalización de settings
+	const normalized = {
+		...defaultSettings,
+		...(settings || {}),
+	};
+	
+	// Efecto para inicializar valores si es la primera carga
 	useEffect(() => {
-		onChangeRef.current = onChange;
-	}, [onChange]);
-
-	useEffect(() => {
-		async function loadFloatingSettings() {
-			try {
-				const res = await fetch('/wp-json/wjlc/v1/general-settings', {
-					method: 'GET',
-					headers: {
-						'X-WP-Nonce': wjlcData.nonce,
-					},
-				});
-
-				if (!res.ok) throw new Error('Error cargando settings');
-
-				const json = await res.json();
-				const data = json.settings?.floating || {};
-
-				const tooltip = data.tooltipText ?? '¿Necesitas ayuda?';
-				const pos = data.position ?? 'right';
-				const anim = data.animationType ?? 'none';
-				const d = data.delay ?? 1;
-				const mobile = data.mobileOnly ?? false;
-				const showQrVal = data.showQR ?? false;
-				const openWebVal = data.openWeb ?? false;
-
-				setTooltipText(tooltip);
-				setPosition(pos);
-				setAnimationType(anim);
-				setDelay(d);
-				setMobileOnly(mobile);
-				setShowQR(showQrVal);
-				setOpenWeb(openWebVal);
-
-				onChange({
-					tooltipText: tooltip,
-					position: pos,
-					delay: d,
-					mobileOnly: mobile,
-				});
-			} catch (e) {
-				console.error('Floating settings error:', e);
-			}
-		}
-
-		loadFloatingSettings();
+		onChange(normalized);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	/**
-	 * 2) Enviar cambios al padre
-	 */
-	useEffect(() => {
-		onChangeRef.current({
-			tooltipText: tooltipText || '¿Necesitas ayuda?',
-			tooltipInterval,
-			position,
-			animationType,
-			delay,
-			mobileOnly,
-			showQR,
-			openWeb,
-		});
-	}, [
-		tooltipText,
-		position,
-		delay,
-		mobileOnly,
-		animationType,
-		tooltipInterval,
-		showQR,
-		openWeb,
-	]);
+	const updateField = (field, value) => {
+		const updated = {
+			...normalized,
+			[field]: value,
+		};
+		onChange(updated);
+	};
 
 	return (
 		<div className="jlc-floating-options">
@@ -100,14 +46,16 @@ export default function FloatingButtonOptions({ onChange }) {
 					type="text"
 					className="jlc-input"
 					placeholder="¿Necesitas ayuda?"
-					value={tooltipText}
-					onChange={(e) => setTooltipText(e.target.value)}
+					value={normalized.tooltipText}
+					onChange={(e) => updateField('tooltipText', e.target.value)}
 				/>
 
 				<p className="jlc-description">
 					Texto breve que se muestra junto al botón
 				</p>
 			</div>
+
+			{/* Intervalo Tooltip */}
 			<div className="jlc-field">
 				<label className="jlc-label">
 					Intervalo de la información emergente
@@ -118,14 +66,16 @@ export default function FloatingButtonOptions({ onChange }) {
 						type="number"
 						min={3}
 						className="jlc-input-number"
-						value={tooltipInterval}
-						onChange={(e) => setTooltipInterval(Number(e.target.value))}
+						value={normalized.tooltipInterval}
+						onChange={(e) =>
+							updateField('tooltipInterval', Number(e.target.value))
+						}
 					/>
 					<span className="jlc-delay-suffix">segundos</span>
 				</div>
 
 				<p className="jlc-description">
-					Frecuencia con la que aparece automáticamente el información
+					Frecuencia con la que aparece automáticamente la información
 					emergente.
 				</p>
 			</div>
@@ -138,8 +88,8 @@ export default function FloatingButtonOptions({ onChange }) {
 					<label className="jlc-radio">
 						<input
 							type="radio"
-							checked={position === 'left'}
-							onChange={() => setPosition('left')}
+							checked={normalized.position === 'left'}
+							onChange={() => updateField('position', 'left')}
 						/>
 						Izquierda
 					</label>
@@ -147,22 +97,23 @@ export default function FloatingButtonOptions({ onChange }) {
 					<label className="jlc-radio">
 						<input
 							type="radio"
-							checked={position === 'right'}
-							onChange={() => setPosition('right')}
+							checked={normalized.position === 'right'}
+							onChange={() => updateField('position', 'right')}
 						/>
 						Derecha
 					</label>
 				</div>
 			</div>
 
+			{/* Tipo de animación */}
 			<div className="jlc-field">
 				<label className="jlc-label">Tipo de animación</label>
 
 				<div className="jlc-select-wrapper">
 					<select
 						className="jlc-select"
-						value={animationType}
-						onChange={(e) => setAnimationType(e.target.value)}
+						value={normalized.animationType}
+						onChange={(e) => updateField('animationType', e.target.value)}
 					>
 						<option value="none">Sin animación</option>
 						<option value="pulse">Pulso</option>
@@ -180,8 +131,8 @@ export default function FloatingButtonOptions({ onChange }) {
 						type="number"
 						min={-1}
 						className="jlc-input-number"
-						value={delay}
-						onChange={(e) => setDelay(Number(e.target.value))}
+						value={normalized.delay}
+						onChange={(e) => updateField('delay', Number(e.target.value))}
 					/>
 					<span className="jlc-delay-suffix">segundos</span>
 				</div>
@@ -196,20 +147,20 @@ export default function FloatingButtonOptions({ onChange }) {
 				<label className="jlc-checkbox">
 					<input
 						type="checkbox"
-						checked={mobileOnly}
-						onChange={(e) => setMobileOnly(e.target.checked)}
+						checked={normalized.mobileOnly}
+						onChange={(e) => updateField('mobileOnly', e.target.checked)}
 					/>
 					Solo mostrar el botón en móviles
 				</label>
 			</div>
 
-			{/* OPCIONES DE ESCRITORIO */}
+			{/* Opciones de escritorio */}
 			<div className="jlc-field">
 				<label className="jlc-checkbox">
 					<input
 						type="checkbox"
-						checked={showQR}
-						onChange={(e) => setShowQR(e.target.checked)}
+						checked={normalized.showQR}
+						onChange={(e) => updateField('showQR', e.target.checked)}
 					/>
 					Mostrar código QR para escanear con el móvil
 				</label>
@@ -217,8 +168,8 @@ export default function FloatingButtonOptions({ onChange }) {
 				<label className="jlc-checkbox">
 					<input
 						type="checkbox"
-						checked={openWeb}
-						onChange={(e) => setOpenWeb(e.target.checked)}
+						checked={normalized.openWeb}
+						onChange={(e) => updateField('openWeb', e.target.checked)}
 					/>
 					Abrir directamente WhatsApp Web
 				</label>
