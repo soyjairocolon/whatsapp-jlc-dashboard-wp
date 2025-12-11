@@ -71,8 +71,8 @@ export default function GeneralTab({ globalSettings, updateSettings }) {
 
 				<div className="jlc-section-card">
 					<IconSelector
-						settings={general.icon}
-						onChange={(data) => updateGeneral('icon', data)}
+						settings={globalSettings.general.icon}
+						onChange={(data) => updateSettings('icon', data)}
 					/>
 				</div>
 

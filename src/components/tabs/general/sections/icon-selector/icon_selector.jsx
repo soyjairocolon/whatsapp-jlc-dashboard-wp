@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import IconImagePicker from './icon-image-picker/icon_image_picker';
-import iconDefaultWS from '../../../../../assets/images/icons/free/default_whatsapp.png'
+import iconDefaultWS from '../../../../../assets/images/icons/free/default_whatsapp.png';
 import iconDefaultChat from '../../../../../assets/images/icons/free/default_chat.png';
 import iconDefaultSupport from '../../../../../assets/images/icons/free/default_support.png';
 import iconPremium1 from '../../../../../assets/images/icons/premium/premium_1.jpg';
@@ -8,18 +8,12 @@ import iconPremium2 from '../../../../../assets/images/icons/premium/premium_2.p
 import './icon_selector.css';
 
 export default function IconSelector({ settings = {}, onChange }) {
-	// ===============================
-	//  ESTADO LOCAL
-	// ===============================
 	const [selectedIcon, setSelectedIcon] = useState('default_whatsapp');
 	const [customImage, setCustomImage] = useState('');
 	const [behavior, setBehavior] = useState('toggle');
 	const [color, setColor] = useState('#25D366');
 	const [premiumUnlocked, setPremiumUnlocked] = useState(false);
 
-	// ===============================
-	//  ÍCONOS
-	// ===============================
 	const freeIcons = [
 		{ id: 'default_whatsapp', src: iconDefaultWS },
 		{ id: 'default_chat', src: iconDefaultChat },
@@ -31,9 +25,7 @@ export default function IconSelector({ settings = {}, onChange }) {
 		{ id: 'premium_2', label: 'Chat Pro', src: iconPremium2 },
 	];
 
-	// ==========================================================
-	//  1. CUANDO CAMBIEN SETTINGS DESDE WORDPRESS → CARGARLOS
-	// ==========================================================
+	// CUANDO CAMBIEN SETTINGS DESDE WORDPRESS → CARGARLOS
 	useEffect(() => {
 		if (!settings) return;
 
@@ -44,9 +36,7 @@ export default function IconSelector({ settings = {}, onChange }) {
 		setPremiumUnlocked(settings.premium_unlocked || false);
 	}, [settings]);
 
-	// ==========================================================
-	//  2. NOTIFICAR CAMBIOS AL COMPONENTE PADRE (GeneralTab)
-	// ==========================================================
+	// NOTIFICAR CAMBIOS AL COMPONENTE PADRE (GeneralTab)
 	useEffect(() => {
 		onChange({
 			selected_icon: selectedIcon,
@@ -59,14 +49,19 @@ export default function IconSelector({ settings = {}, onChange }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedIcon, customImage, behavior, color, premiumUnlocked]);
 
-	// ==========================================================
-	//  3. CAMBIO DE ICON (free o premium)
-	// ==========================================================
 	const handleIconChange = (id, isPremium) => {
 		if (isPremium && !premiumUnlocked) return;
 
 		setSelectedIcon(id);
-		setCustomImage(''); // Si elige un icon, eliminamos el custom_image
+		setCustomImage('');
+	};
+
+	const handleBehaviorChange = (value) => {
+		setBehavior(value);
+
+		if (value === 'fixed' && !customImage) {
+			setSelectedIcon('custom_image');
+		}
 	};
 
 	return (
@@ -77,7 +72,6 @@ export default function IconSelector({ settings = {}, onChange }) {
 				Selecciona el estilo visual principal del botón de contacto.
 			</p>
 
-			{/* Íconos FREE */}
 			<div className="jlc-icon-grid">
 				{freeIcons.map((icon) => (
 					<div
@@ -92,7 +86,6 @@ export default function IconSelector({ settings = {}, onChange }) {
 				))}
 			</div>
 
-			{/* Íconos PREMIUM */}
 			<div className="jlc-icon-premium-grid">
 				{premiumIcons.map((icon) => {
 					const locked = !premiumUnlocked;
@@ -117,7 +110,6 @@ export default function IconSelector({ settings = {}, onChange }) {
 				})}
 			</div>
 
-			{/* Imagen personalizada */}
 			<div className="jlc-custom-image-box">
 				<label className="jlc-label">Imagen personalizada</label>
 
@@ -153,14 +145,13 @@ export default function IconSelector({ settings = {}, onChange }) {
 				</div>
 			</div>
 
-			{/* BEHAVIOR */}
 			<div className="jlc-radio-group">
 				<label>
 					<input
 						type="radio"
 						value="toggle"
 						checked={behavior === 'toggle'}
-						onChange={(e) => setBehavior(e.target.value)}
+						onChange={(e) => handleBehaviorChange(e.target.value)}
 					/>
 					<span>Alternar con el ícono</span>
 				</label>
@@ -169,14 +160,16 @@ export default function IconSelector({ settings = {}, onChange }) {
 					<input
 						type="radio"
 						value="fixed"
+						className={!customImage ? "jlc-radio-disabled" : ""}
+						disabled={!customImage}
 						checked={behavior === 'fixed'}
-						onChange={(e) => setBehavior(e.target.value)}
+						onChange={(e) => handleBehaviorChange(e.target.value)}
 					/>
+
 					<span>Imagen fija</span>
 				</label>
 			</div>
 
-			{/* COLOR PICKER */}
 			<div className="jlc-color-box">
 				<label className="jlc-label">Selecciona el color del botón</label>
 
