@@ -1,0 +1,92 @@
+.jlc-premium-comparison {
+	padding: 40px 20px;
+	margin-bottom: 50px;
+}
+
+.jlc-premium-comparison__title {
+	text-align: center;
+	font-size: 26px;
+	font-weight: 700;
+	color: #1b1e32;
+	margin-bottom: 12px;
+}
+
+.jlc-premium-comparison__subtitle {
+	text-align: center;
+	color: #4e5166;
+	max-width: 650px;
+	margin: 0 auto 35px;
+	font-size: 15px;
+	line-height: 1.45;
+}
+
+/* Tabla */
+.jlc-premium-comparison__table {
+	width: 100%;
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+	overflow: hidden;
+}
+
+.jlc-premium-comparison__header,
+.jlc-premium-comparison__row {
+	display: grid;
+	grid-template-columns: 1fr 120px 120px;
+	padding: 16px 20px;
+	align-items: center;
+}
+
+.jlc-premium-comparison__header {
+	background: #f7f8fb;
+	font-weight: 600;
+	color: #1b1e32;
+	border-bottom: 1px solid #e7e8ee;
+}
+
+.jlc-premium-comparison__row {
+	border-bottom: 1px solid #f0f0f5;
+}
+
+.jlc-premium-comparison__row:last-child {
+	border-bottom: none;
+}
+
+.jlc-premium-col-feature {
+	font-size: 15px;
+	color: #1b1e32;
+}
+
+.jlc-premium-col-free,
+.jlc-premium-col-premium {
+	text-align: center;
+	font-size: 18px;
+}
+
+.jlc-check {
+	color: #22c55e;
+	font-weight: 700;
+}
+
+.jlc-cross {
+	color: #ef4444;
+	font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+	.jlc-premium-comparison__header,
+	.jlc-premium-comparison__row {
+		grid-template-columns: 1fr 70px 70px;
+		padding: 14px 12px;
+	}
+
+	.jlc-premium-col-feature {
+		font-size: 14px;
+	}
+
+	.jlc-premium-col-free,
+	.jlc-premium-col-premium {
+		font-size: 16px;
+	}
+}

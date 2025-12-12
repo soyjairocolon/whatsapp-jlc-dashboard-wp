@@ -1,0 +1,58 @@
+.jlc-premium-roadmap {
+	padding: 40px 20px;
+	margin-bottom: 50px;
+}
+
+.jlc-premium-roadmap__title {
+	font-size: 26px;
+	font-weight: 700;
+	text-align: center;
+	color: #1b1e32;
+	margin-bottom: 10px;
+}
+
+.jlc-premium-roadmap__subtitle {
+	text-align: center;
+	color: #4e5166;
+	max-width: 600px;
+	margin: 0 auto 40px;
+	font-size: 16px;
+}
+
+.jlc-premium-roadmap__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 25px;
+}
+
+.jlc-premium-roadmap__card {
+	background: #ffffff;
+	padding: 25px;
+	border-radius: 16px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+	text-align: center;
+	transition: all 0.25s ease;
+}
+
+.jlc-premium-roadmap__card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.jlc-premium-roadmap__icon {
+	font-size: 40px;
+	margin-bottom: 15px;
+}
+
+.jlc-premium-roadmap__card-title {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: #1b1e32;
+}
+
+.jlc-premium-roadmap__card-desc {
+	font-size: 14px;
+	color: #5d6175;
+	line-height: 1.45;
+}

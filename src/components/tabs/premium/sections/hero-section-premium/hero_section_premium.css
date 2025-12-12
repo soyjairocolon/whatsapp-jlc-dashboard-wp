@@ -1,0 +1,61 @@
+.jlc-premium-hero {
+	position: relative;
+	text-align: center;
+	padding: 60px 20px;
+	background: linear-gradient(135deg, #f5f9ff 0%, #eef3ff 100%);
+	border-radius: 16px;
+	margin-bottom: 40px;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+	overflow: hidden;
+}
+
+/* ============================================
+   FLAG DIAGONAL – ESTILO "Etiqueta Premium"
+   ============================================ */
+.jlc-premium-hero__badge-flag {
+	position: absolute;
+	top: 22px;
+	left: -40px;
+	background: #6c5ce7;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 8px 50px;
+	transform: rotate(-23deg);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	letter-spacing: 0.3px;
+	border-radius: 4px;
+	pointer-events: none;
+	-webkit-transform: rotate(-23deg);
+	-moz-transform: rotate(-23deg);
+	-ms-transform: rotate(-23deg);
+	-o-transform: rotate(-23deg);
+}
+
+/* ============================================ */
+
+.jlc-premium-hero__icon-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.jlc-premium-hero__icon {
+	width: 80px;
+	height: 80px;
+	filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+}
+
+.jlc-premium-hero__title {
+	font-size: 32px;
+	font-weight: 700;
+	color: #1b1e32;
+	margin: 10px 0;
+}
+
+.jlc-premium-hero__subtitle {
+	font-size: 18px;
+	color: #50556c;
+	margin-bottom: 25px;
+}
+

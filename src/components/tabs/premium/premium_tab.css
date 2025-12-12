@@ -1,0 +1,11 @@
+.jlc-premium-page {
+	background: #fff;
+	border-radius: 18px;
+	padding: 10px 20px 30px;
+	border: 1px solid rgba(0, 0, 0, 0.04);
+	max-width: 100%;
+	width: 90%;
+	margin-bottom: 40px;
+	position: relative;
+	box-shadow: var(--jlc-shadow);
+}

@@ -1,0 +1,64 @@
+.jlc-free-features {
+	padding: 50px 20px;
+	margin-bottom: 60px;
+	background: #fafbff;
+}
+
+.jlc-free-features__title {
+	text-align: center;
+	font-size: 26px;
+	font-weight: 700;
+	color: #1b1e32;
+	margin-bottom: 10px;
+}
+
+.jlc-free-features__subtitle {
+	text-align: center;
+	color: #4e5166;
+	max-width: 650px;
+	margin: 0 auto 40px;
+	font-size: 15px;
+	line-height: 1.45;
+}
+
+/* Grid de features */
+.jlc-free-features__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 22px;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+/* Card */
+.jlc-free-feature-card {
+	background: #ffffff;
+	border-radius: 14px;
+	padding: 24px 20px;
+	text-align: center;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.jlc-free-feature-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.jlc-free-feature-icon {
+	font-size: 38px;
+	margin-bottom: 12px;
+}
+
+.jlc-free-feature-title {
+	font-size: 17px;
+	font-weight: 600;
+	color: #1b1e32;
+	margin-bottom: 6px;
+}
+
+.jlc-free-feature-desc {
+	font-size: 14px;
+	color: #565a70;
+	line-height: 1.45;
+}
