@@ -52,11 +52,14 @@ export default function Dashboard() {
 					setGlobalSettings((prev) => ({
 						...prev,
 						...json.settings,
+
 						general: {
 							phone: incomingGeneral.phone || {},
 							icon: incomingGeneral.icon || {},
-							floating: incomingGeneral.floating || {}, 
+							floating: incomingGeneral.floating || {},
 						},
+
+						visibilidad: json.settings.visibilidad || {},
 					}));
 				}
 			} catch (e) {
@@ -71,12 +74,9 @@ export default function Dashboard() {
 	const updateSettings = (section, values) => {
 		setGlobalSettings((prev) => ({
 			...prev,
-			general: {
-				...prev.general,
-				[section]: {
-					...prev.general[section],
-					...values,
-				},
+			[section]: {
+				...prev[section],
+				...values,
 			},
 		}));
 	};
@@ -96,7 +96,12 @@ export default function Dashboard() {
 				return <EstilosTab {...sharedProps} />;
 
 			case 'visibilidad':
-				return <VisibilidadTab {...sharedProps} />;
+				return (
+					<VisibilidadTab
+						settings={globalSettings.visibilidad}
+						onChange={(data) => updateSettings('visibilidad', data)}
+					/>
+				);
 
 			case 'avanzado':
 				return <AvanzadoTab {...sharedProps} />;

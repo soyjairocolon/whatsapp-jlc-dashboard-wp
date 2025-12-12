@@ -2,7 +2,7 @@
 import PhoneSettings from './sections/phone-settings/phone_settings';
 import IconSelector from './sections/icon-selector/icon_selector';
 import FloatingButtonOptions from './sections/floating-button-options/floating_button_options';
-import PreviewBox from './sections/preview-box/preview_box';
+// import PreviewBox from './sections/preview-box/preview_box';
 import { notifySuccess, toastError } from '../../../utils/notifications';
 import './general_tab.css';
 
