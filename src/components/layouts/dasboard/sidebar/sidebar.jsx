@@ -16,15 +16,6 @@ export default function Sidebar({ activeTab, setActiveTab }) {
 
 				<button
 					className={`jlc-nav-item ${
-						activeTab === 'estilos' ? 'jlc-active' : ''
-					}`}
-					onClick={() => setActiveTab('estilos')}
-				>
-					Estilos
-				</button>
-
-				<button
-					className={`jlc-nav-item ${
 						activeTab === 'visibilidad' ? 'jlc-active' : ''
 					}`}
 					onClick={() => setActiveTab('visibilidad')}

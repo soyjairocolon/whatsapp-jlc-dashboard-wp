@@ -1,9 +1,7 @@
 /* global wjlcData */
 import { useState, useEffect } from 'react';
 import Sidebar from '../../components/layouts/dasboard/sidebar/sidebar';
-import Content from '../../components/layouts/dasboard/content/content';
 import GeneralTab from '../../components/tabs/general/general_tab';
-import EstilosTab from '../../components/tabs/estilos/estilos_tab';
 import VisibilidadTab from '../../components/tabs/visibilidad/visibilidad_tab';
 import AvanzadoTab from '../../components/tabs/avanzado/avanzado_tab';
 import PremiumTab from '../../components/tabs/premium/premium_tab';
@@ -21,7 +19,6 @@ export default function Dashboard() {
 			icon: {},
 			floating: {},
 		},
-		estilos: {},
 		visibilidad: {},
 		avanzado: {},
 		premium: {},
@@ -91,9 +88,6 @@ export default function Dashboard() {
 		switch (activeTab) {
 			case 'general':
 				return <GeneralTab {...sharedProps} />;
-
-			case 'estilos':
-				return <EstilosTab {...sharedProps} />;
 
 			case 'visibilidad':
 				return (
