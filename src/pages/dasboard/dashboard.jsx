@@ -50,6 +50,41 @@ export default function Dashboard() {
 				if (json.success && json.settings) {
 					const incomingGeneral = json.settings.general || {};
 
+					// ================================
+					// DEFAULTS COMPLETOS PARA GTM
+					// ================================
+					const defaultsGtm = {
+						enabled: false,
+						container_id: '',
+						event_name: 'jlc_whatsapp_click',
+						meta_event_name: 'jlc_whatsapp_meta',
+						params: {
+							phone: true,
+							page: true,
+							timestamp: true,
+							type: true,
+							utm: true,
+						},
+					};
+
+					const incomingAdv = json.settings.avanzado || {};
+
+					// =========================================
+					// MERGE PROFUNDO PARA NO PERDER LOS CHECKS
+					// =========================================
+					const mergedAdv = {
+						custom_css: incomingAdv.custom_css ?? '',
+						custom_js: incomingAdv.custom_js ?? '',
+						gtm: {
+							...defaultsGtm,
+							...(incomingAdv.gtm || {}),
+							params: {
+								...defaultsGtm.params,
+								...(incomingAdv.gtm?.params || {}),
+							},
+						},
+					};
+
 					setGlobalSettings((prev) => ({
 						...prev,
 
@@ -63,7 +98,8 @@ export default function Dashboard() {
 
 						visibilidad: json.settings.visibilidad || {},
 
-						avanzado: json.settings.avanzado || {}, 
+						// APLICAMOS EL MERGE CORRECTO
+						avanzado: mergedAdv,
 					}));
 				}
 			} catch (e) {

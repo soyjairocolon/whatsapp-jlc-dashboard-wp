@@ -12,39 +12,56 @@ export default function AvanzadoTab({ globalSettings, updateSettings }) {
 	const openPremiumModal = () => setPremiumModalOpen(true);
 	const closePremiumModal = () => setPremiumModalOpen(false);
 
-	// Estado local
+	// ===========================================================
+	// ESTADO LOCAL (SIEMPRE REFLEJA EL BACKEND CORRECTAMENTE)
+	// ===========================================================
 	const avanzado = {
 		custom_css: globalSettings.avanzado?.custom_css ?? '',
 		custom_js: globalSettings.avanzado?.custom_js ?? '',
 
 		gtm: {
-			enabled: globalSettings.avanzado?.gtm?.enabled ?? false,
+			enabled: !!globalSettings.avanzado?.gtm?.enabled,
 			container_id: globalSettings.avanzado?.gtm?.container_id ?? '',
 			event_name:
 				globalSettings.avanzado?.gtm?.event_name ?? 'jlc_whatsapp_click',
 			meta_event_name:
 				globalSettings.avanzado?.gtm?.meta_event_name ?? 'jlc_whatsapp_meta',
+
 			params: {
-				phone: globalSettings.avanzado?.gtm?.params?.phone ?? true,
-				page: globalSettings.avanzado?.gtm?.params?.page ?? true,
-				timestamp: globalSettings.avanzado?.gtm?.params?.timestamp ?? true,
-				type: globalSettings.avanzado?.gtm?.params?.type ?? true,
-				utm: globalSettings.avanzado?.gtm?.params?.utm ?? true,
+				phone: !!globalSettings.avanzado?.gtm?.params?.phone,
+				page: !!globalSettings.avanzado?.gtm?.params?.page,
+				timestamp: !!globalSettings.avanzado?.gtm?.params?.timestamp,
+				type: !!globalSettings.avanzado?.gtm?.params?.type,
+				utm: !!globalSettings.avanzado?.gtm?.params?.utm,
 			},
 		},
 	};
 
-	// Actualizar cualquier campo dentro de avanzado
+	// ===========================================================
+	// ACTUALIZAR ESTADO GLOBAL DE MANERA PROFUNDA (MERGE CORRECTO)
+	// ===========================================================
 	const updateAvanzado = (values) => {
-		updateSettings('avanzado', {
-			...avanzado,
+		const newState = {
+			...globalSettings.avanzado,
 			...values,
-		});
+
+			gtm: {
+				...globalSettings.avanzado?.gtm,
+				...(values.gtm || {}),
+
+				params: {
+					...globalSettings.avanzado?.gtm?.params,
+					...(values.gtm?.params || {}),
+				},
+			},
+		};
+
+		updateSettings('avanzado', newState);
 	};
 
-	// ===========================
-	// GUARDAR CAMBIOS EN BACKEND
-	// ===========================
+	// ===========================================================
+	// GUARDAR AJUSTES EN BACKEND
+	// ===========================================================
 	const saveAllChanges = async () => {
 		const payload = {
 			custom_css: avanzado.custom_css,
@@ -78,6 +95,9 @@ export default function AvanzadoTab({ globalSettings, updateSettings }) {
 		}
 	};
 
+	// ===========================================================
+	// RENDER
+	// ===========================================================
 	return (
 		<section className="jlc-advanced-page">
 			{/* MODAL PREMIUM */}

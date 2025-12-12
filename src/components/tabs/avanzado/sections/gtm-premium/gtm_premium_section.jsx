@@ -6,21 +6,24 @@ export default function GtmPremiumSection({
 	onChange,
 	openPremiumModal,
 }) {
-	const isPremiumUnlocked = false;
+	const isPremiumUnlocked = true;
 	const [showHelpModal, setShowHelpModal] = useState(false);
 
+	// Valores reales según backend
 	const gtm = settings?.gtm || {
 		enabled: false,
 		event_name: 'jlc_whatsapp_click',
-		meta_event_name: 'jlc_meta_event',
-		send_phone: true,
-		send_page: true,
-		send_timestamp: true,
-		send_type: true,
-		send_utm: true,
+		meta_event_name: 'jlc_whatsapp_meta',
+		params: {
+			phone: true,
+			page: true,
+			timestamp: true,
+			type: true,
+			utm: true,
+		},
 	};
 
-	// Actualizar valores globales
+	// UPDATE de valores simples
 	const updateField = (key, value) => {
 		onChange({
 			gtm: {
@@ -30,7 +33,19 @@ export default function GtmPremiumSection({
 		});
 	};
 
-	// Para bloquear inputs cuando no es Premium
+	// UPDATE para params.{phone,page,timestamp,type,utm}
+	const updateParam = (key, value) => {
+		onChange({
+			gtm: {
+				...gtm,
+				params: {
+					...gtm.params,
+					[key]: value,
+				},
+			},
+		});
+	};
+
 	const blockAction = () => {
 		if (!isPremiumUnlocked) openPremiumModal();
 	};
@@ -55,7 +70,6 @@ export default function GtmPremiumSection({
 					</p>
 				</div>
 
-				{/* Ícono de ayuda */}
 				<button
 					type="button"
 					className="jlc-gtm-help-btn"
@@ -65,13 +79,13 @@ export default function GtmPremiumSection({
 				</button>
 			</div>
 
-			{/* Contenido GTM */}
 			<div
 				className={
 					'jlc-gtm-container ' + (!isPremiumUnlocked ? 'jlc-gtm-locked' : '')
 				}
 				onClick={blockAction}
 			>
+				{/* ACTIVAR GTM */}
 				<div className="jlc-gtm-row jlc-gtm-checkbox">
 					<label>Activar GTM</label>
 					<input
@@ -82,6 +96,7 @@ export default function GtmPremiumSection({
 					/>
 				</div>
 
+				{/* EVENT NAME */}
 				<div className="jlc-gtm-row">
 					<label>Nombre del evento</label>
 					<input
@@ -92,6 +107,7 @@ export default function GtmPremiumSection({
 					/>
 				</div>
 
+				{/* META EVENT NAME */}
 				<div className="jlc-gtm-row">
 					<label>Meta FB Event</label>
 					<input
@@ -106,68 +122,63 @@ export default function GtmPremiumSection({
 
 				<h4 className="jlc-gtm-subtitle">Parámetros a enviar</h4>
 
+				{/* PHONE */}
 				<div className="jlc-gtm-row jlc-gtm-checkbox">
 					<label>Teléfono</label>
 					<input
 						type="checkbox"
-						checked={gtm.send_phone}
-						onChange={(e) => updateField('send_phone', e.target.checked)}
+						checked={gtm.params.phone}
+						onChange={(e) => updateParam('phone', e.target.checked)}
 						disabled={!isPremiumUnlocked}
 					/>
 				</div>
 
+				{/* PAGE */}
 				<div className="jlc-gtm-row jlc-gtm-checkbox">
 					<label>Página</label>
 					<input
 						type="checkbox"
-						checked={gtm.send_page}
-						onChange={(e) => updateField('send_page', e.target.checked)}
+						checked={gtm.params.page}
+						onChange={(e) => updateParam('page', e.target.checked)}
 						disabled={!isPremiumUnlocked}
 					/>
 				</div>
 
+				{/* TIMESTAMP */}
 				<div className="jlc-gtm-row jlc-gtm-checkbox">
 					<label>Timestamp</label>
 					<input
 						type="checkbox"
-						checked={gtm.send_timestamp}
-						onChange={(e) => updateField('send_timestamp', e.target.checked)}
+						checked={gtm.params.timestamp}
+						onChange={(e) => updateParam('timestamp', e.target.checked)}
 						disabled={!isPremiumUnlocked}
 					/>
 				</div>
 
+				{/* TYPE */}
 				<div className="jlc-gtm-row jlc-gtm-checkbox">
 					<label>Tipo de clic</label>
 					<input
 						type="checkbox"
-						checked={gtm.send_type}
-						onChange={(e) => updateField('send_type', e.target.checked)}
+						checked={gtm.params.type}
+						onChange={(e) => updateParam('type', e.target.checked)}
 						disabled={!isPremiumUnlocked}
 					/>
 				</div>
 
+				{/* UTM */}
 				<div className="jlc-gtm-row jlc-gtm-checkbox">
 					<label>UTM parameters</label>
 					<input
 						type="checkbox"
-						checked={gtm.send_utm}
-						onChange={(e) => updateField('send_utm', e.target.checked)}
+						checked={gtm.params.utm}
+						onChange={(e) => updateParam('utm', e.target.checked)}
 						disabled={!isPremiumUnlocked}
 					/>
 				</div>
 			</div>
 
-			{/* Overlay Premium */}
-			{!isPremiumUnlocked && (
-				<div className="jlc-premium-overlay" onClick={openPremiumModal}>
-					<div className="jlc-premium-overlay-content">
-						<div className="jlc-lock-icon">🔒</div>
-						Funcionalidad Premium
-					</div>
-				</div>
-			)}
-
-			{/* Modal de ayuda */}
+			{/* HELP MODAL */}
 			{showHelpModal && (
 				<div
 					className="jlc-premium-modal-overlay"
@@ -186,13 +197,13 @@ export default function GtmPremiumSection({
 
 						<ul style={{ textAlign: 'left', marginBottom: '16px' }}>
 							<li>
-								Envía un evento: <strong>jlc_whatsapp_click</strong>
+								Evento: <strong>jlc_whatsapp_click</strong>
 							</li>
 							<li>
-								Soporte para Meta Ads → <strong>jlc_meta_event</strong>
+								Meta Ads: <strong>jlc_meta_event</strong>
 							</li>
 							<li>
-								Incluye: teléfono, página, timestamp, tipo y parámetros UTM
+								Incluye parámetros: teléfono, página, timestamp, tipo, UTM
 							</li>
 						</ul>
 

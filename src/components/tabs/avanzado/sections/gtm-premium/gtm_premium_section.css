@@ -15,9 +15,9 @@
 }
 
 .jlc-gtm-help-btn {
-	background: var(--jlc-premium-dark);
-	color: var(--jlc-primary);
-	border: 1px solid var(--jlc-primary);
+	background: #eef2ff;
+	color: #3730a3;
+	border: 1px solid #c7d2fe;
 	font-size: 14px;
 	width: 28px;
 	height: 28px;
@@ -31,8 +31,7 @@
 }
 
 .jlc-gtm-help-btn:hover {
-	background: var(--jlc-primary);
-	color: var(--jlc-premium-dark);
+	background: #e0e7ff;
 }
 
 .jlc-gtm-row {
@@ -68,13 +67,6 @@
 	box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
 }
 
-/* .jlc-gtm-row input[type='checkbox'] {
-	width: 18px;
-	height: 18px;
-	cursor: pointer;
-} */
-
-/* Checkbox estilo Premium (coherente con FloatingButtonOptions) */
 .jlc-gtm-checkbox {
 	display: flex;
 	align-items: center;
