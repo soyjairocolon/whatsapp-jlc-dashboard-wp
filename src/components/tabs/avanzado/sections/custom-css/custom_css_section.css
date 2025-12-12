@@ -1,7 +1,6 @@
 .jlc-advanced-section-css {
 	background: #fff;
 	border-radius: 14px;
-	padding: 22px;
 	margin-top: 20px;
 	position: relative;
 }
@@ -14,7 +13,6 @@
 	gap: 12px;
 }
 
-/* Contenedor del título + descripción */
 .jlc-advanced-texts {
 	display: flex;
 	flex-direction: column;
@@ -34,11 +32,6 @@
 	line-height: 1.4;
 }
 
-.jlc-line-numbers::before,
-.jlc-line-numbers::after {
-	content: none !important;
-}
-
 .jlc-btn-fill-example {
 	background: #eef2ff;
 	color: #3730a3;
@@ -48,72 +41,63 @@
 	border-radius: 6px;
 	cursor: pointer;
 	transition: 0.2s ease;
+	white-space: nowrap;
 }
 
 .jlc-btn-fill-example:hover {
 	background: #e0e7ff;
 }
 
-.jlc-editor-wrapper {
-	position: relative;
-	display: flex;
-	background: #f8f9fb;
+.jlc-codemirror-container {
 	border: 1px solid #d4d7dd;
 	border-radius: 10px;
+	background: #f7f9fc;
 	overflow: hidden;
-	height: 300px;
+	max-height: 400px;
 }
 
-.jlc-line-numbers {
-	width: 40px;
-	background: #eef0f4;
-	border-right: 1px solid #d4d7dd;
-	color: #7a7f87;
-	font-size: 13px;
-	font-family: 'JetBrains Mono', monospace;
-	padding: 12px 6px;
-	text-align: right;
-	overflow: hidden;
-	line-height: 1.4;
-	margin-right: 10px;
-}
-
-.jlc-code-editor {
-	flex: 1;
+.cm-editor {
+	font-family: 'JetBrains Mono', monospace !important;
+	font-size: 13px !important;
+	background: #f7f9fc !important;
 	padding: 12px;
-	font-family: 'JetBrains Mono', monospace;
-	font-size: 12px;
-	line-height: 1.5;
-	white-space: pre-wrap;
-	outline: none;
-	overflow-y: auto;
-	margin: 0;
 }
 
-/* Genera números de línea automáticamente */
-.jlc-line-numbers::before {
-	content: counter(lines);
-	display: block;
-	counter-reset: lines;
-	white-space: pre;
+.cm-scroller {
+	overflow: auto !important;
 }
 
-.jlc-code-editor[contenteditable='true'] {
-	counter-reset: line;
+.cm-gutters {
+	background: #eef0f4 !important;
+	border-right: 1px solid #d4d7dd !important;
+	color: #7a7f87 !important;
+	font-size: 13px !important;
 }
 
-.jlc-editor-footer {
+.cm-activeLine {
+	background: #e8f2ff !important;
+	border-radius: 4px;
+}
+
+.jlc-editor-info {
 	font-size: 14px;
 	color: rgba(0, 0, 0, 0.55);
 	margin-top: 8px;
 }
 
-.jlc-editor-footer a {
+.jlc-editor-info a {
 	color: var(--jlc-premium-dark);
 	text-decoration: underline;
 	font-weight: 600;
 }
 
-.jlc-editor-footer a:hover {
+.jlc-editor-info a:hover {
 	text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+	.jlc-advanced-section-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }

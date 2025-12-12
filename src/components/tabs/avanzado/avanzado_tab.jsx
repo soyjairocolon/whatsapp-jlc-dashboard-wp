@@ -9,8 +9,8 @@ export default function AvanzadoTab({ globalSettings, updateSettings }) {
 			<div className="jlc-advanced-container">
 				<div className="jlc-advanced-card">
 					<CustomCSSSection
-						settings={globalSettings.advanced || {}}
-						onChange={(updated) => updateSettings('advanced', updated)}
+						settings={globalSettings.avanzado || {}}
+						onChange={(updated) => updateSettings('avanzado', updated)}
 					/>
 
 					<button className="jlc-btn-primary">Guardar cambios</button>

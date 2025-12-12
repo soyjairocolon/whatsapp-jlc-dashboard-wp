@@ -1,75 +1,90 @@
 import { useEffect, useRef } from 'react';
+import { EditorView, highlightActiveLine } from '@codemirror/view';
+import { EditorState } from '@codemirror/state';
+import { css } from '@codemirror/lang-css';
+import { lineNumbers } from '@codemirror/view';
 import './custom_css_section.css';
 
 export default function CustomCSSSection({ settings = {}, onChange }) {
 	const editorRef = useRef(null);
+	const viewRef = useRef(null);
 
-	// Cargar valor inicial
 	useEffect(() => {
-		const editor = editorRef.current;
-		if (!editor) return;
-
-		const cssValue = settings.custom_css ?? '';
-
-		if (editor.innerText !== cssValue) {
-			editor.innerText = cssValue;
-		}
-	}, [settings]);
-
-	// Manejar escritura del usuario
-	const handleInput = () => {
 		if (!editorRef.current) return;
-		const value = editorRef.current.innerText;
-		onChange({ custom_css: value });
-	};
 
-	// Rellenar ejemplo
+		const startCSS = settings.custom_css ?? '';
+
+		// Listener para enviar cambios al backend
+		const updateListener = EditorView.updateListener.of((update) => {
+			if (update.docChanged) {
+				const value = update.state.doc.toString();
+				onChange({ custom_css: value });
+			}
+		});
+
+		// Crear estado del editor
+		const state = EditorState.create({
+			doc: startCSS,
+			extensions: [
+				css(),
+				highlightActiveLine(),
+				lineNumbers(), // ← CORRECTO
+				EditorView.lineWrapping,
+				EditorView.editable.of(true),
+				updateListener,
+
+				// Tema visual
+				EditorView.theme({
+					'&': {
+						backgroundColor: '#f7f9fc',
+						border: '1px solid #e5e7eb',
+						borderRadius: '10px',
+						fontFamily: "'JetBrains Mono', monospace",
+						fontSize: '13px',
+					},
+					'.cm-gutters': {
+						backgroundColor: '#eef0f4',
+						color: '#7a7f87',
+						borderRight: '1px solid #d4d7dd',
+					},
+					'.cm-activeLine': {
+						backgroundColor: '#e8f2ff',
+					},
+				}),
+			],
+		});
+
+		// Crear instancia del editor
+		viewRef.current = new EditorView({
+			state,
+			parent: editorRef.current,
+		});
+
+		// Cleanup
+		return () => {
+			viewRef.current?.destroy();
+		};
+	}, []);
+
+	// Insertar ejemplo
 	const fillExample = () => {
+		if (!viewRef.current) return;
+
 		const example = `/* Ejemplo: personalizar el botón WhatsApp */
 .wjlc-floating-btn {
 	border: 3px solid #25D366;
 	border-radius: 12px;
 	box-shadow: 0 4px 15px rgba(0,0,0,0.25);
 }`;
-		if (editorRef.current) editorRef.current.innerText = example;
-		onChange({ custom_css: example });
+
+		viewRef.current.dispatch({
+			changes: {
+				from: 0,
+				to: viewRef.current.state.doc.length,
+				insert: example,
+			},
+		});
 	};
-
-	// Numeración de líneas
-	useEffect(() => {
-		if (!editorRef.current) return;
-
-		const editorEl = editorRef.current;
-
-		const wrapper = editorEl.parentElement;
-		const lineBox = wrapper.querySelector('.jlc-line-numbers');
-
-		// limpiar cualquier contenido previo (evita el "0" heredado)
-		lineBox.innerText = '';
-
-		const updateLineNumbers = () => {
-			const text = editorEl.innerText || '';
-			const realLines = text.split('\n').length;
-
-			// mínimo 20 líneas por defecto
-			const totalLines = Math.max(realLines, 20);
-
-			let html = '';
-
-			for (let i = 1; i <= totalLines; i++) {
-				html += i + '\n';
-			}
-
-			lineBox.innerText = html;
-		};
-
-		editorEl.addEventListener('input', updateLineNumbers);
-		updateLineNumbers();
-
-		return () => {
-			editorEl.removeEventListener('input', updateLineNumbers);
-		};
-	}, []);
 
 	return (
 		<div className="jlc-advanced-section-css">
@@ -92,28 +107,19 @@ export default function CustomCSSSection({ settings = {}, onChange }) {
 				</button>
 			</div>
 
-			<div className="jlc-editor-wrapper">
-				<div className="jlc-line-numbers" aria-hidden="true"></div>
+			<div ref={editorRef} className="jlc-codemirror-container"></div>
 
-				<pre
-					ref={editorRef}
-					className="jlc-code-editor"
-					contentEditable={true}
-					spellCheck={false}
-					onInput={handleInput}
-				></pre>
-			</div>
-
-			<div className="jlc-editor-footer">
-				<span>Puedes encontrar ejemplos y más trucos </span>
+			<p className="jlc-editor-info">
+				Puedes encontrar ejemplos y más trucos{' '}
 				<a
-					href="https://jlccompany.com/docs/css-whatsapp-jlc"
+					href="https://developer.mozilla.org/es/docs/Web/CSS"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					aquí.
+					aquí
 				</a>
-			</div>
+				.
+			</p>
 		</div>
 	);
 }
