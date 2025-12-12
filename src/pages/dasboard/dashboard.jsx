@@ -13,6 +13,7 @@ import './dashboard.css';
 
 export default function Dashboard() {
 	const [activeTab, setActiveTab] = useState('general');
+
 	const [globalSettings, setGlobalSettings] = useState({
 		general: {
 			phone: '',
@@ -25,7 +26,9 @@ export default function Dashboard() {
 		premium: {},
 	});
 
+	// ============================
 	// CARGA INICIAL DESDE WORDPRESS
+	// ============================
 	useEffect(() => {
 		async function loadAllSettings() {
 			try {
@@ -49,6 +52,7 @@ export default function Dashboard() {
 
 					setGlobalSettings((prev) => ({
 						...prev,
+
 						...json.settings,
 
 						general: {
@@ -58,7 +62,8 @@ export default function Dashboard() {
 						},
 
 						visibilidad: json.settings.visibilidad || {},
-						avanzado: json.settings.avanzado || {},
+
+						avanzado: json.settings.avanzado || {}, 
 					}));
 				}
 			} catch (e) {
@@ -69,7 +74,9 @@ export default function Dashboard() {
 		loadAllSettings();
 	}, []);
 
+	// =======================================
 	// FUNCIÓN PARA ACTUALIZAR CUALQUIER SECCIÓN
+	// =======================================
 	const updateSettings = (section, values) => {
 		setGlobalSettings((prev) => ({
 			...prev,
@@ -80,7 +87,9 @@ export default function Dashboard() {
 		}));
 	};
 
-	// ENVIAR ESTADO GLOBAL A CADA TAB
+	// ============================
+	// RENDER DE CADA TAB
+	// ============================
 	const renderTab = () => {
 		const sharedProps = {
 			globalSettings,

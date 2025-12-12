@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { notifySuccess, toastError } from '../../../utils/notifications';
 import CustomCSSSection from './sections/custom-css/custom_css_section';
 import CustomJSPremiumSection from './sections/custom-js-premium/custom_js_premium_section';
+import GtmPremiumSection from './sections/gtm-premium/gtm_premium_section';
 import './avanzado_tab.css';
 
 export default function AvanzadoTab({ globalSettings, updateSettings }) {
@@ -11,13 +12,29 @@ export default function AvanzadoTab({ globalSettings, updateSettings }) {
 	const openPremiumModal = () => setPremiumModalOpen(true);
 	const closePremiumModal = () => setPremiumModalOpen(false);
 
-	// Estado local de la sección avanzada
-	const avanzado = globalSettings.avanzado || {
-		custom_css: '',
-		custom_js: '',
+	// Estado local
+	const avanzado = {
+		custom_css: globalSettings.avanzado?.custom_css ?? '',
+		custom_js: globalSettings.avanzado?.custom_js ?? '',
+
+		gtm: {
+			enabled: globalSettings.avanzado?.gtm?.enabled ?? false,
+			container_id: globalSettings.avanzado?.gtm?.container_id ?? '',
+			event_name:
+				globalSettings.avanzado?.gtm?.event_name ?? 'jlc_whatsapp_click',
+			meta_event_name:
+				globalSettings.avanzado?.gtm?.meta_event_name ?? 'jlc_whatsapp_meta',
+			params: {
+				phone: globalSettings.avanzado?.gtm?.params?.phone ?? true,
+				page: globalSettings.avanzado?.gtm?.params?.page ?? true,
+				timestamp: globalSettings.avanzado?.gtm?.params?.timestamp ?? true,
+				type: globalSettings.avanzado?.gtm?.params?.type ?? true,
+				utm: globalSettings.avanzado?.gtm?.params?.utm ?? true,
+			},
+		},
 	};
 
-	// Actualizar campo dentro de globalSettings.avanzado
+	// Actualizar cualquier campo dentro de avanzado
 	const updateAvanzado = (values) => {
 		updateSettings('avanzado', {
 			...avanzado,
@@ -25,11 +42,14 @@ export default function AvanzadoTab({ globalSettings, updateSettings }) {
 		});
 	};
 
+	// ===========================
 	// GUARDAR CAMBIOS EN BACKEND
+	// ===========================
 	const saveAllChanges = async () => {
 		const payload = {
-			custom_css: globalSettings.avanzado?.custom_css || '',
-			custom_js: globalSettings.avanzado?.custom_js || '',
+			custom_css: avanzado.custom_css,
+			custom_js: avanzado.custom_js,
+			gtm: avanzado.gtm,
 		};
 
 		console.log('📤 Enviando al backend (save-advanced-settings):', payload);
@@ -60,15 +80,14 @@ export default function AvanzadoTab({ globalSettings, updateSettings }) {
 
 	return (
 		<section className="jlc-advanced-page">
+			{/* MODAL PREMIUM */}
 			{isPremiumModalOpen && (
 				<div className="jlc-premium-modal-overlay" onClick={closePremiumModal}>
 					<div
 						className="jlc-premium-modal"
 						onClick={(e) => e.stopPropagation()}
 					>
-						<h2 className="jlc-premium-modal-title">
-							Pásate a Premium
-						</h2>
+						<h2 className="jlc-premium-modal-title">Pásate a Premium</h2>
 						<p className="jlc-premium-modal-text">
 							Esta funcionalidad es exclusiva para usuarios Premium.
 						</p>
@@ -85,17 +104,21 @@ export default function AvanzadoTab({ globalSettings, updateSettings }) {
 			<div className="jlc-advanced-container">
 				<div className="jlc-advanced-card">
 					<CustomCSSSection
-						settings={globalSettings.avanzado}
+						settings={avanzado}
 						onChange={(data) => updateAvanzado(data)}
 					/>
 
-					<div className="jlc-section-card">
-						<CustomJSPremiumSection
-							settings={globalSettings.avanzado}
-							onChange={(data) => updateAvanzado(data)}
-							openPremiumModal={openPremiumModal}
-						/>
-					</div>
+					<CustomJSPremiumSection
+						settings={avanzado}
+						onChange={(data) => updateAvanzado(data)}
+						openPremiumModal={openPremiumModal}
+					/>
+
+					<GtmPremiumSection
+						settings={avanzado}
+						onChange={(data) => updateAvanzado(data)}
+						openPremiumModal={openPremiumModal}
+					/>
 
 					<button className="jlc-btn-primary" onClick={saveAllChanges}>
 						Guardar cambios
